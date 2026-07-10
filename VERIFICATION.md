@@ -68,8 +68,50 @@ This section tabulates the verification tests performed for each module.
 
 ## 4. Waveform Analysis 
 
-To be added
+### 4.1. Baud Rate Generator 
 
+<div align = "center">
+  
+![Baud Rate Generator Waveform](waveforms/brg.png)
+
+</div>
+
+- Demonstrates generation of a single-cycle baud_tick pulse every BAUD_DIV clock cycles.
+- This tick acts as the common timing reference for both the transmitter and receiver.
+
+
+### 4.2. UART Transmitter
+
+<div align = "center">
+  
+![UART TX Waveform](waveforms/tx_waveform.gif)
+
+</div>
+
+- Shows transmission of a complete UART frame consisting of a start bit, eight data bits (LSB first), an even parity bit, and a stop bit.
+- `tx_busy` remains asserted throughout the frame and returns LOW after transmission completes.
+
+### 4.3. UART Receiver 
+
+<div align = "center">
+  
+![UART RX Waveform](waveforms/rx_waveform.gif)
+
+</div>
+
+- Illustrates start-bit detection, midpoint sampling using the 16× oversampling counter, serial-to-parallel conversion, parity verification, and frame completion.
+- `rx_done` is asserted only after a valid frame has been received.
+
+### 4.4. UART TOP Module
+
+<div align = "center">
+  
+![UART TOP Waveform](waveforms/full_waveform.gif)
+
+</div>
+
+- Demonstrates complete end-to-end communication through the integrated UART transceiver.
+- The transmitted byte is successfully reconstructed at the receiver output without parity errors.
 
 ## 5. Verification Results
 
