@@ -17,7 +17,7 @@ Each testbench shares several common verification components, including:
 - DUT instantiation
 - Input stimulus generation
 - Output monitoring (`$monitor`)
-- Waveform dumping (`$dumpfile`,`$dumpvars`)
+- Waveform dumping (`$dumpfile`, `$dumpvars`)
 - Simulation control (`$finish`)
 
 >[!NOTE]
@@ -33,7 +33,7 @@ This section tabulates the verification tests performed for each module.
 |:-------:|:--------:|:----------------:|:------:|
 | BRG-01| Reset Verification | Verify that asserting `rst` resets the internal counter and deasserts `baud_tick`. | ✅ Pass|
 | BRG-02| Baud Tick Generation | Verify that `baud_tick` is asserted after the overridden baud divisor (`CLK_FREQ` = 100, `BAUD_RATE` = 10) is reached.| ✅ Pass|
-| BRG-03| Continous Tick Generation | Verify that `baud_tick` is generated periodically during continuous operation after reset is released. | ✅ Pass|
+| BRG-03| Continuous Tick Generation | Verify that `baud_tick` is generated periodically during continuous operation after reset is released. | ✅ Pass|
 
 ### 3.2 UART Transmitter (`UART_TX_tb`)
 |Test ID | Test Name | Test Description | Status |
@@ -102,7 +102,7 @@ This section tabulates the verification tests performed for each module.
 - Illustrates start-bit detection, midpoint sampling using the 16× oversampling counter, serial-to-parallel conversion, parity verification, and frame completion.
 - `rx_done` is asserted only after a valid frame has been received.
 
-### 4.4. UART TOP Module
+### 4.4. Integrated UART Transceiver
 
 <div align = "center">
   
@@ -125,7 +125,7 @@ All planned verification scenarios were successfully completed for the UART comm
 | UART Transceiver | 4 | ✅ Pass |
 | TOTAL | 17 | 17/17 Passed| 
 
-Overall verification confirms:
+Overall verification demonstrated:
 - Correct baud tick generation.
 - Correct UART frame transmission.
 - Reliable UART frame reception.
@@ -190,7 +190,7 @@ The updated verification environment successfully transmitted multiple UART fram
 
 Throughout the development of the UART Transceiver, the verification environment evolved from simple module-level testing to a structured, reusable verification framework. Several improvements were introduced to increase reliability, automation, and maintainability: 
 
-- Replaced manual verification with self-checking testbenches using automated pass/fail validation.
+- Introduced self-checking verification for the integrated UART Transceiver testbench using automated pass/fail validation.
 - Introduced reusable verification tasks (`reset_dut`, `send_byte`, `check_result`, and `print_summary`) to eliminate repetitive testbench code.
 - Replaced fixed simulation delays with event-driven synchronization using `wait()` construct on DUT status signals (`tx_busy` and `rx_done`) for more robust verification.
 - Expanded verification from individual module testing to end-to-end system-level loopback verification.
@@ -202,4 +202,4 @@ The verification process successfully validated the functionality of the UART Tr
 
 Throughout the verification process, the testbench environment evolved from simple manually driven simulations to a structured, reusable, and self-checking framework. This not only improved the efficiency and reliability of verification but also reinforced the importance of event-driven synchronization, systematic debugging, and scalable verification practices in RTL design.
 
-Overall, this verification effort provides a strong foundation for verifying more complex communication protocols and digital systems in future projects.
+Overall, this verification effort provides a strong foundation for developing scalable verification methodologies applicable to more complex communication protocols and digital systems.
