@@ -7,11 +7,11 @@ This project implements a UART (Universal Asynchronous Receiver/Transmitter) Tra
 ## 2. Features 
 
 - 8-bit UART communication
-- Even parity generation and verification
-- 16× oversampling receiver
-- Configurable baud rate via parameterized clock divider
-- False start detection
 - FSM-based transmitter and receiver
+- Configurable baud rate via parameterized clock divider
+- 16× oversampling receiver
+- False start detection
+- Even parity generation and verification
 - Self-checking verification environment
 
 ## 3. UART Frame Format 
@@ -53,15 +53,21 @@ UART_Transceiver/
 │   ├── summary_waveform.png
 │   └── summary.png
 │
+├── waveforms/
+│   ├── brg.png
+│   ├── tx_waveform.gif
+│   ├── rx_waveform.gif
+│   └── full_waveform.gif
+│
 ├── Verification.md
-├── LICENSE
-└── README.md
+├── README.md
+└── LICENSE
 
 ```
 
 ## 5. Architecture 
 
-The UART Transceiver is organized as a modular RTL design consisting of a Baud Rate Generator, UART Transmitter, UART Receiver, and a top-level integration module. The Baud Rate Generator provides a shared baud tick to both the transmitter and receiver, while the transmitter's serial output (`tx`) is connected to the receiver's serial input (`rx`) through a serial communication line for end-to-end data transfer.
+The UART Transceiver is organized as a modular RTL design consisting of a Baud Rate Generator, UART Transmitter, UART Receiver, and a top-level integration module. The Baud Rate Generator provides a shared baud tick to both the transmitter and receiver, while the transmitter's serial output (`tx`) is internally connected to the receiver's serial input (`rx`) to enable end-to-end verification.
 
 <div align="center">
 
@@ -102,7 +108,7 @@ The UART Transceiver is organized as a modular RTL design consisting of a Baud R
 
 </div>
 
-### 7.2. Top Module Waveform (full view)
+### 7.2. Integrated UART Waveform
 
 <div align="center">
 
@@ -121,7 +127,7 @@ The UART Transceiver is organized as a modular RTL design consisting of a Baud R
 ## 8. Verification 
 
 > [!NOTE]
-> A detailed discussion of the verification methodology, test cases, debugging experience, and verification results is available in [VERIFICATION.md](https://github.com/theYash856/UART-Transceiver/blob/main/VERIFICATION.md)
+> A comprehensive verification report, including the verification methodology, test cases, waveform analysis, debugging experience, and verification results is available in [VERIFICATION.md](https://github.com/theYash856/UART-Transceiver/blob/main/VERIFICATION.md)
 
 ## 9. Key Learnings
 
